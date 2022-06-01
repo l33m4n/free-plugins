@@ -39,6 +39,8 @@ import java.util.stream.IntStream;
 public class AutoRockCake extends Plugin
 {
 	@Inject
+    	private InterfaceUtils interfaceUtils;
+	@Inject
 	private OverlayManager overlayManager;
 	@Inject
 	private Client client;
@@ -169,7 +171,9 @@ public class AutoRockCake extends Plugin
 		if (player != null && client != null) {
 			state = getState();
 			if (config.onlyNMZ() && !atNMZ())
+			//added logout when not in dream
 				state = PluginState.NOT_IN_NMZ;
+				interfaceUtils.logout();
 			if (state != PluginState.TIMEOUT)
 				lastState = state;
 			if (client.getVarbitValue(Varbits.NMZ_ABSORPTION) < 100)
